@@ -1,0 +1,6 @@
+# development
+.vscode
+venv/
+
+# sensitive data
+expenses_data/
