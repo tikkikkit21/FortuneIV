@@ -39,7 +39,7 @@ def find_date_cell(df: pd.DataFrame) -> Tuple[int,int]:
     
     return date_row, date_col
 
-def format_report(csv_file: str) -> None:
+def format_report_file(csv_file: str) -> None:
     """Formats a CSV file so 'Date' column header is at A1 and any extra data
     above or to the left is deleted
 
@@ -72,7 +72,11 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('Usage: python format_expense_report.py <filename.csv>')
         sys.exit(1)
-    csv_file = sys.argv[1]
+    path_arg = Path(sys.argv[1])
 
     # format report file
-    format_report(csv_file)
+    if path_arg.is_file() and path_arg.suffix.endswith('.csv'):
+        format_report_file(str(path_arg))
+    elif path_arg.is_dir():
+        for file_path in path_arg.rglob('*.csv'):
+            format_report_file(str(file_path))
