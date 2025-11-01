@@ -6,7 +6,7 @@ from typing import Tuple
 DATE_COLUMN_HEADER = 'Date'
 
 def find_date_cell(df: pd.DataFrame) -> Tuple[int,int]:
-    """Searches for the location of the 'Date' column header
+    """Searches for the location of the 'Date' column header.
 
     Args:
         df (DataFrame): Pandas DataFrame representation of the CSV file
@@ -41,7 +41,7 @@ def find_date_cell(df: pd.DataFrame) -> Tuple[int,int]:
 
 def format_report_file(csv_file: str) -> None:
     """Formats a CSV file so 'Date' column header is at A1 and any extra data
-    above or to the left is deleted
+    above or to the left is deleted.
 
     Args:
         csv_file (string): path to CSV file to format
@@ -70,7 +70,7 @@ def format_report_file(csv_file: str) -> None:
 if __name__ == '__main__':
     # fetch filename from CLI
     if len(sys.argv) < 2:
-        print('Usage: python format_expense_report.py <filename.csv>')
+        print('Usage: python format_expense_report.py <csv_file|directory>')
         sys.exit(1)
     path_arg = Path(sys.argv[1])
 
