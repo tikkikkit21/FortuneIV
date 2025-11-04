@@ -1,40 +1,15 @@
 import sys
 from pathlib import Path
-import json
 import pandas as pd
 from typing import List
-
-# load info from JSON files
-def load_json(json_file: str) -> List[str]:
-    """Loads a JSON file and returns as a list of values.
-
-    - If JSON is an array, returns the array as-is
-    - If JSON is a dict, returns list of keys
-
-    Args:
-        json_file (str): path to JSON file to load
-
-    Returns:
-        List[str]: Resulting list of values
-    """
-
-    # open file
-    with open(json_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-
-    # return based on 
-    if isinstance(data, list):
-        return data
-    elif isinstance(data, dict):
-        return list(data.keys())
-    else:
-        raise ValueError(f'{file_path} needs to be an array or object.')
-
-ALLOWED_CATEGORIES = load_json('config/categories.json')
-ALLOWED_METHODS    = load_json('config/payment_methods.json')
-REQUIRED_COLUMNS   = load_json('config/required_values.json')
+from helpers import load_json_root
 
 PRINT_DIVIDER = '-'*50
+
+# load info from JSON files
+ALLOWED_CATEGORIES = load_json_root('config/categories.json')
+ALLOWED_METHODS    = load_json_root('config/payment_methods.json')
+REQUIRED_COLUMNS   = load_json_root('config/required_values.json')
 
 def validate_report_file(csv_file: str) -> bool:
     """Validates a single expense report CSV file.

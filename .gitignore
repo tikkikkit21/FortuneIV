@@ -1,6 +1,7 @@
 # development
 .vscode
 venv/
+__pycache__
 
 # sensitive data
 expenses_data/
