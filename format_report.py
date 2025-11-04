@@ -47,12 +47,11 @@ def format_report_file(csv_file: str) -> None:
         csv_file (string): path to CSV file to format
     """
 
-    # validate and read CSV file
+    # validate path and read CSV file
     if not Path(csv_file).is_file():
         print(f'Error: File {csv_file} does not exist.')
         sys.exit(1)
-
-    df = pd.read_csv(csv_file, header=None, dtype=str)
+    df = pd.read_csv(csv_file, header=None)
 
     # find location of 'Date' column header
     date_row, date_col = find_date_cell(df)
@@ -70,7 +69,7 @@ def format_report_file(csv_file: str) -> None:
 if __name__ == '__main__':
     # fetch filename from CLI
     if len(sys.argv) < 2:
-        print('Usage: python format_expense_report.py <csv_file|directory>')
+        print('Usage: python format_report.py <csv_file|directory>')
         sys.exit(1)
     path_arg = Path(sys.argv[1])
 

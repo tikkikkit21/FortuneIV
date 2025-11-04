@@ -1,0 +1,8 @@
+{
+  "Date": "date",
+  "Category": "category",
+  "Amount": "amount",
+  "Paid To / From": "counterparty",
+  "w/": "method",
+  "Notes": "notes"
+}

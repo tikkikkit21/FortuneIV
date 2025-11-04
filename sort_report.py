@@ -14,8 +14,13 @@ def sort_report_file(csv_file: str) -> None:
         csv_file (string): path to CSV file to format
     """
 
-    # process CSV
+    # validate path and read CSV file
+    if not Path(csv_file).is_file():
+        print(f'Error: File {csv_file} does not exist.')
+        sys.exit(1)
     df = pd.read_csv(csv_file)
+
+    # process CSV
     df[DATE_COLUMN_HEADER] = pd.to_datetime(df[DATE_COLUMN_HEADER], errors='coerce')
     df_sorted = df.sort_values(by=DATE_COLUMN_HEADER)
     df_sorted[DATE_COLUMN_HEADER] = df_sorted[DATE_COLUMN_HEADER].dt.strftime(DATETIME_FORMAT)
@@ -27,7 +32,7 @@ def sort_report_file(csv_file: str) -> None:
 if __name__ == '__main__':
     # fetch filename from CLI
     if len(sys.argv) < 2:
-        print('Usage: python sort_expense_report.py <csv_file|directory>')
+        print('Usage: python sort_report.py <csv_file|directory>')
         sys.exit(1)
     path_arg = Path(sys.argv[1])
 
